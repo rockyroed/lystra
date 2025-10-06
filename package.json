@@ -12,11 +12,17 @@
     "prettier:write": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "test:watch": "vitest --watch",
+    "test:e2e": "vitest --project e2e",
+    "test:unit": "vitest --project nuxt",
+    "test:all": "vitest run",
     "prepare": "husky"
   },
   "dependencies": {
     "@clerk/nuxt": "^1.9.3",
+    "@clerk/themes": "^2.4.24",
     "@nuxt/eslint": "1.9.0",
+    "@nuxt/fonts": "0.11.4",
     "@nuxt/image": "1.11.0",
     "@nuxt/ui": "4.0.0",
     "@pinia/nuxt": "0.11.2",

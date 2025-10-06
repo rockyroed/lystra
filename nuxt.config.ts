@@ -7,7 +7,9 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/ui',
+    '@nuxt/fonts',
     '@nuxt/test-utils',
+    '@nuxt/test-utils/module',
     '@nuxt/image',
     '@nuxt/eslint',
     '@pinia/nuxt',
@@ -17,5 +19,13 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   vite: {
     plugins: [tailwindcss()],
+  },
+
+  app: {
+    head: {
+      htmlAttrs: {
+        style: 'background-color: #0E172B;',
+      },
+    },
   },
 });
