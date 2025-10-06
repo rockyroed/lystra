@@ -9,10 +9,10 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/fonts',
     '@nuxt/test-utils',
+    '@nuxt/test-utils/module',
     '@nuxt/image',
     '@nuxt/eslint',
     '@pinia/nuxt',
-    ...(process.env.NODE_ENV !== 'test' ? ['@clerk/nuxt'] : []),
   ],
 
   css: ['~/assets/css/main.css'],
