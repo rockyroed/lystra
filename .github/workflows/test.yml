@@ -1,4 +1,4 @@
-name: Lint
+name: Test
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  lint:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -20,11 +20,5 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Run lint
-        run: pnpm lint
-
-      - name: Run prettier
-        run: pnpm prettier:check
-
-      - name: Run type checking
-        run: pnpm tsc --noEmit
+      - name: Run tests
+        run: pnpm test:all
