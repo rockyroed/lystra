@@ -1,4 +1,4 @@
-name: Lint
+name: CI
 
 on:
   push:
@@ -9,16 +9,27 @@ on:
       - main
 
 jobs:
-  lint:
+  ci:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [20, 22, 24]
     steps:
-      - name: Setup (install dependencies)
-        uses: ./.github/workflows/setup.yml
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.18.0
+
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Run lint
         run: pnpm lint
@@ -28,3 +39,6 @@ jobs:
 
       - name: Run type checking
         run: pnpm tsc --noEmit
+
+      - name: Run tests
+        run: pnpm test:all
