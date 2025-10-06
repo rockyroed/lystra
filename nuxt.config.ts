@@ -19,4 +19,12 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+
+  app: {
+    head: {
+      htmlAttrs: {
+        style: 'background-color: #0E172B;',
+      },
+    },
+  },
 });
