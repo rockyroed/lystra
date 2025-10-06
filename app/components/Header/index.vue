@@ -7,14 +7,26 @@ const colorMode = useColorMode();
 <template>
   <div class="flex justify-between items-center px-4 md:px-8 lg:px-28 py-4">
     <UButton class="cursor-pointer" variant="ghost" :square="true" color="neutral" to="/">
-      <NuxtImg
-        :src="colorMode.value === 'dark' ? '/lystra-logo-dark.svg' : '/lystra-logo-light.svg'"
-        alt="Lystra logo"
-        width="40"
-        height="40"
-        fit="contain"
-        background="transparent"
-      />
+      <ClientOnly>
+        <NuxtImg
+          :src="colorMode.value === 'dark' ? '/lystra-logo-dark.svg' : '/lystra-logo-light.svg'"
+          alt="Lystra logo"
+          width="40"
+          height="40"
+          fit="contain"
+          background="transparent"
+        />
+        <template #fallback>
+          <NuxtImg
+            src="/lystra-logo-light.svg"
+            alt="Lystra logo"
+            width="40"
+            height="40"
+            fit="contain"
+            background="transparent"
+          />
+        </template>
+      </ClientOnly>
       <h1 class="text-gray-900 dark:text-white text-lg font-bold">Lystra</h1>
     </UButton>
     <div class="flex items-center gap-1.5">
