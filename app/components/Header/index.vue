@@ -5,7 +5,7 @@ const colorMode = useColorMode();
 </script>
 
 <template>
-  <div class="flex justify-between items-center px-28 py-4">
+  <div class="flex justify-between items-center px-4 md:px-8 lg:px-28 py-4">
     <UButton class="cursor-pointer" variant="ghost" :square="true" color="neutral" to="/">
       <NuxtImg
         :src="colorMode.value === 'dark' ? '/lystra-logo-dark.svg' : '/lystra-logo-light.svg'"
