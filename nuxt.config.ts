@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/eslint',
     '@pinia/nuxt',
-    '@clerk/nuxt',
+    ...(process.env.NODE_ENV !== 'test' ? ['@clerk/nuxt'] : []),
   ],
 
   css: ['~/assets/css/main.css'],
