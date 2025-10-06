@@ -25,6 +25,7 @@
     "@nuxt/fonts": "0.11.4",
     "@nuxt/image": "1.11.0",
     "@nuxt/ui": "4.0.0",
+    "@tanstack/vue-table": "8.21.3",
     "@pinia/nuxt": "0.11.2",
     "@tailwindcss/vite": "^4.1.14",
     "eslint": "^9.37.0",
