@@ -61,6 +61,10 @@ These checks run automatically when you commit. Please ensure all files are lint
 
 - Run `pnpm build` to check if build has no errors.
 
+## Testing
+
+- Run `pnpm test:all` to run tests.
+
 ## Submitting a Pull Request
 
 1. Ensure your branch is up to date with `main`.
