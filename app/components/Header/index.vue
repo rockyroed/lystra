@@ -15,6 +15,7 @@ const colorMode = useColorMode();
           height="40"
           fit="contain"
           background="transparent"
+          data-testId="logo"
         />
         <template #fallback>
           <NuxtImg
@@ -30,7 +31,7 @@ const colorMode = useColorMode();
       <h1 class="text-gray-900 dark:text-white text-lg font-bold">Lystra</h1>
     </UButton>
     <div class="flex items-center gap-1.5">
-      <UColorModeButton class="cursor-pointer">
+      <UColorModeButton class="cursor-pointer" data-testId="color-mode-toggle">
         <template #fallback>
           <UButton loading variant="ghost" color="neutral" />
         </template>
