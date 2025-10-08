@@ -82,4 +82,6 @@ jobs:
         run: pnpm exec playwright-core install --with-deps
 
       - name: Run tests
-        run: pnpm test:all
+        run: |
+          pnpm test:unit
+          pnpm test:nuxt
