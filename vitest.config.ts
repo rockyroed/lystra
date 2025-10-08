@@ -1,12 +1,23 @@
-import { defineVitestConfig } from '@nuxt/test-utils/config';
+import { defineConfig } from 'vitest/config';
+import { defineVitestProject } from '@nuxt/test-utils/config';
 
-export default defineVitestConfig({
+export default defineConfig({
   test: {
-    environment: 'nuxt',
-    env: {
-      NODE_ENV: 'test',
-      NUXT_PUBLIC_CLERK_PUBLISHABLE_KEY: 'pk_test_fake_key',
-      NUXT_CLERK_SECRET_KEY: 'sk_test_fake_key',
-    },
+    projects: [
+      {
+        test: {
+          name: 'unit',
+          include: ['test/{e2e,unit}/*.{test,spec}.ts'],
+          environment: 'node',
+        },
+      },
+      await defineVitestProject({
+        test: {
+          name: 'nuxt',
+          include: ['test/nuxt/*.{test,spec}.ts'],
+          environment: 'nuxt',
+        },
+      }),
+    ],
   },
 });
