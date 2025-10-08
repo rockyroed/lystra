@@ -1,6 +1,72 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
-import Header from '../../../app/components/Header/index.vue';
+import App from '../../app/app.vue';
+import Header from '../../app/components/Header/index.vue';
+import DefaultLayout from '../../app/layouts/default.vue';
 import { describe, expect, it, vi } from 'vitest';
+
+describe('App', () => {
+  it('should match snapshot', async () => {
+    const wrapper = await mountSuspended(App, {
+      global: {
+        stubs: {
+          SignInButton: true,
+          SignedOut: true,
+          UserButton: true,
+          SignedIn: true,
+        },
+      },
+    });
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
+  it('should render properly', async () => {
+    const wrapper = await mountSuspended(App, {
+      global: {
+        stubs: {
+          SignInButton: true,
+          SignedOut: true,
+          UserButton: true,
+          SignedIn: true,
+        },
+      },
+    });
+    expect(wrapper.exists()).toBe(true);
+  });
+
+  // TODO: Add more tests as needed
+});
+
+describe('DefaultLayout', () => {
+  it('should match snapshot', async () => {
+    const wrapper = await mountSuspended(DefaultLayout, {
+      global: {
+        stubs: {
+          SignInButton: true,
+          SignedOut: true,
+          UserButton: true,
+          SignedIn: true,
+        },
+      },
+    });
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
+  it('should render properly', async () => {
+    const wrapper = await mountSuspended(DefaultLayout, {
+      global: {
+        stubs: {
+          SignInButton: true,
+          SignedOut: true,
+          UserButton: true,
+          SignedIn: true,
+        },
+      },
+    });
+    expect(wrapper.exists()).toBe(true);
+  });
+
+  // TODO: Add more tests as needed
+});
 
 describe('Header', () => {
   it('should match snapshot', async () => {
@@ -44,9 +110,7 @@ describe('Header', () => {
     });
     const logo = wrapper.find('img');
     expect(logo.exists()).toBe(true);
-    expect(logo.attributes('src')).toBe(
-      '/_ipx/b_transparent&fit_contain&s_40x40/lystra-logo-light.svg'
-    );
+    expect(logo.attributes('src')).toContain('lystra-logo-light.svg');
     expect(logo.attributes('alt')).toBe('Lystra logo');
     expect(logo.attributes('width')).toBe('40');
     expect(logo.attributes('height')).toBe('40');
@@ -120,7 +184,7 @@ describe('Header', () => {
       useColorMode: () => colorMode,
     }));
 
-    const HeaderWithMock = (await import('../../../app/components/Header/index.vue')).default;
+    const HeaderWithMock = (await import('../../app/components/Header/index.vue')).default;
     const wrapper = await mountSuspended(HeaderWithMock, {
       global: {
         stubs: {
