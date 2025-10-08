@@ -6,6 +6,7 @@
     </div>
     <div class="p-5">
       <Table />
+      <Modal />
     </div>
   </section>
 </template>

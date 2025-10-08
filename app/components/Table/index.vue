@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { getPaginationRowModel } from '@tanstack/vue-table';
 import { h, resolveComponent } from 'vue';
-import type { TableColumn, TableRow, FormError } from '@nuxt/ui';
+import type { TableColumn, TableRow } from '@nuxt/ui';
+import { useModalStore } from '@/stores/useModal';
 
 const table = useTemplateRef('table');
 const UBadge = resolveComponent('UBadge');
@@ -10,7 +11,7 @@ const UDropdownMenu = resolveComponent('UDropdownMenu');
 const UButton = resolveComponent('UButton');
 const toast = useToast();
 
-const showEditModal = ref(false);
+const modal = useModalStore();
 
 type lystraTable = {
   id: string;
@@ -199,14 +200,7 @@ const columns: TableColumn<lystraTable>[] = [
         {
           label: 'Edit',
           onSelect() {
-            showEditModal.value = true;
-            // copy(row.original.id)
-
-            // toast.add({
-            //   title: 'Payment ID copied to clipboard!',
-            //   color: 'success',
-            //   icon: 'i-lucide-circle-check'
-            // })
+            modal.openModal();
           },
         },
         {
@@ -250,7 +244,6 @@ const columns: TableColumn<lystraTable>[] = [
 const rowSelection = ref<Record<string, boolean>>({});
 
 function onSelect(row: TableRow<lystraTable>) {
-  /* If you decide to also select the column you can do this  */
   row.toggleSelected(!row.getIsSelected());
 }
 
@@ -258,53 +251,6 @@ const pagination = ref({
   pageIndex: 0,
   pageSize: 5,
 });
-
-// ------------ MODAL ------------ //
-const platform = ref(['Facebook', 'Lazada', 'Shopee', 'Tiktok', 'Shein', 'Temu']);
-const priority = ref(['Low', 'Medium', 'High']);
-const status = ref(['In Cart', 'Ordered', 'Delivered', 'Cancelled']);
-const tags = ref(['Placeholder1', 'Placeholder2', 'Placeholder3', 'Placeholder4']);
-
-interface ItemState {
-  item_name?: string;
-  price?: number;
-  link?: string;
-  platform?: string;
-  priority?: string;
-  status?: string;
-  tags?: string[];
-}
-
-const state = reactive<ItemState>({
-  item_name: undefined,
-  price: undefined,
-  link: undefined,
-  platform: undefined,
-  priority: undefined,
-  status: undefined,
-  tags: undefined,
-});
-
-const validate = (state: ItemState): FormError[] => {
-  const errors = [];
-  if (!state.item_name) errors.push({ name: 'item_name', message: 'Required' });
-  if (!state.price) errors.push({ name: 'price', message: 'Required' });
-  if (!state.link) errors.push({ name: 'link', message: 'Required' });
-  if (!state.platform) errors.push({ name: 'platform', message: 'Required' });
-  if (!state.priority) errors.push({ name: 'priority', message: 'Required' });
-  if (!state.status) errors.push({ name: 'status', message: 'Required' });
-  if (!state.tags) errors.push({ name: 'tags', message: 'Required' });
-  return errors;
-};
-
-async function onSubmit() {
-  showEditModal.value = false;
-  toast.add({
-    title: 'Your item has been edited.',
-    color: 'success',
-    icon: 'i-lucide-circle-check',
-  });
-}
 </script>
 
 <template>
@@ -330,61 +276,5 @@ async function onSubmit() {
         @update:page="(p) => table?.tableApi?.setPageIndex(p - 1)"
       />
     </div>
-  </div>
-
-  <div>
-    <UModal v-model:open="showEditModal" title="Edit Item">
-      <template #body>
-        <UForm :validate="validate" :state="state" class="space-y-4" @submit="onSubmit">
-          <div class="grid grid-cols-2 gap-2">
-            <div>
-              <UFormField label="Item Name" name="item_name" required>
-                <UInput v-model="state.item_name" class="w-full" />
-              </UFormField>
-            </div>
-            <div>
-              <UFormField label="Price" name="price" required>
-                <UInput
-                  v-model="state.price"
-                  icon="pepicons-pop:peso"
-                  class="w-full"
-                  type="number"
-                />
-              </UFormField>
-            </div>
-          </div>
-          <div>
-            <UFormField label="Link" name="link" required>
-              <UInput v-model="state.link" class="w-full" />
-            </UFormField>
-          </div>
-          <div class="grid grid-cols-3 gap-2">
-            <div>
-              <UFormField label="Platform" name="platform" required>
-                <UInputMenu v-model="state.platform" :items="platform" class="w-full" />
-              </UFormField>
-            </div>
-            <div>
-              <UFormField label="Priority" name="priority" required>
-                <UInputMenu v-model="state.priority" :items="priority" class="w-full" />
-              </UFormField>
-            </div>
-            <div>
-              <UFormField label="Status" name="status" required>
-                <UInputMenu v-model="state.status" :items="status" class="w-full" />
-              </UFormField>
-            </div>
-          </div>
-          <div>
-            <UFormField label="Tags" name="tags" required>
-              <UInputMenu v-model="state.tags" multiple :items="tags" class="w-full" />
-            </UFormField>
-          </div>
-          <div class="flex justify-center pt-4">
-            <UButton type="submit">Edit Item</UButton>
-          </div>
-        </UForm>
-      </template>
-    </UModal>
   </div>
 </template>
