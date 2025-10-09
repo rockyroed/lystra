@@ -2,7 +2,7 @@
 import { getPaginationRowModel } from '@tanstack/vue-table';
 import { h, resolveComponent } from 'vue';
 import type { TableColumn, TableRow } from '@nuxt/ui';
-import { useModalStore } from '@/stores/useModal';
+import { useModalStore } from '~/stores/modals';
 
 const table = useTemplateRef('table');
 const UBadge = resolveComponent('UBadge');

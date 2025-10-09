@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { FormError } from '@nuxt/ui';
-import { useModalStore } from '@/stores/useModal';
+import { useModalStore } from '~/stores/modals';
 import type { ItemState } from '@/types/item';
 
 const modal = useModalStore();
