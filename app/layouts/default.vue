@@ -1,12 +1,8 @@
 <template>
-  <section class="flex flex-col min-h-screen">
-    <div>
-      <Header />
+  <div class="flex flex-col min-h-screen">
+    <Header />
+    <main class="flex-1">
       <slot />
-    </div>
-    <div class="p-5">
-      <Table />
-      <Modal />
-    </div>
-  </section>
+    </main>
+  </div>
 </template>

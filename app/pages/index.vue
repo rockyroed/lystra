@@ -1,3 +1,6 @@
 <template>
-  <div></div>
+  <section class="p-5">
+    <Table />
+    <Modal />
+  </section>
 </template>
