@@ -5,7 +5,7 @@ const colorMode = useColorMode();
 </script>
 
 <template>
-  <div class="flex justify-between items-center px-4 md:px-8 lg:px-28 py-4">
+  <header class="flex justify-between items-center px-4 md:px-8 lg:px-28 py-4">
     <UButton class="cursor-pointer" variant="ghost" :square="true" color="neutral" to="/">
       <ClientOnly>
         <NuxtImg
@@ -54,5 +54,5 @@ const colorMode = useColorMode();
         />
       </SignedIn>
     </div>
-  </div>
+  </header>
 </template>
