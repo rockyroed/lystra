@@ -1,6 +1,7 @@
 <script setup>
 import { dark, experimental__simple } from '@clerk/themes';
 
+const route = useRoute();
 const colorMode = useColorMode();
 </script>
 
@@ -36,8 +37,8 @@ const colorMode = useColorMode();
           <UButton loading variant="ghost" color="neutral" />
         </template>
       </UColorModeButton>
-      <SignedOut>
-        <SignInButton>
+      <template v-if="route.fullPath !== '/login' && route.fullPath !== '/signup'">
+        <SignedOut>
           <UButton
             class="cursor-pointer"
             variant="ghost"
@@ -45,14 +46,15 @@ const colorMode = useColorMode();
             icon="lucide:log-in"
             :square="true"
             color="neutral"
+            to="/login"
           />
-        </SignInButton>
-      </SignedOut>
-      <SignedIn>
-        <UserButton
-          :appearance="{ baseTheme: colorMode.value === 'dark' ? dark : experimental__simple }"
-        />
-      </SignedIn>
+        </SignedOut>
+        <SignedIn>
+          <UserButton
+            :appearance="{ baseTheme: colorMode.value === 'dark' ? dark : experimental__simple }"
+          />
+        </SignedIn>
+      </template>
     </div>
   </header>
 </template>
